@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Typography, message } from "antd";
+import { Form, Input, Button, Typography, message,Row,Col } from "antd";
 import axios from "axios";
-import "./Signup.css";
-
+import SummaryApi from '../common/index'
+import { Link } from "react-router-dom";
+import "../Styles/SignUp.css";
 const { Title } = Typography;
 
 const Signup = () => {
@@ -10,7 +11,7 @@ const Signup = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Handle sending OTP
+  
   const sendOtp = async () => {
     const mobile = form.getFieldValue("mobile");
     if (!mobile) {
@@ -19,7 +20,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/send-otp", { mobile });
+      const res = await axios.post(SummaryApi.send_otp.url, { mobile });
       if (res.data.success) {
         message.success("OTP sent successfully!");
         setOtpSent(true);
@@ -34,10 +35,9 @@ const Signup = () => {
     }
   };
 
-  // Handle form submission
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/signup", values);
+      const response = await axios.post(SummaryApi.signUp.url, values);
       if (response.data.success) {
         message.success("Signup successful! Please login.");
         form.resetFields();
@@ -78,25 +78,28 @@ const Signup = () => {
         </Form.Item>
 
         <Form.Item
-          label="Mobile"
-          name="mobile"
-          rules={[
-            { required: true, message: "Please enter your mobile number" },
-            { pattern: /^[0-9]{10}$/, message: "Enter a valid 10-digit mobile number" },
-          ]}
-        >
-          <Input
-            placeholder="Enter your mobile number"
-            maxLength={10}
-            style={{ width: "70%", marginRight: "10px" }}
-          />
-        </Form.Item>
+  label="Mobile Number"
+  name="mobile"
+  rules={[{ required: true, message: "Please enter your mobile number" }]}
+>
+  <Row gutter={8}>
+    <Col span={16}>
+      <Input placeholder="Enter mobile number" />
+    </Col>
+    <Col span={8}>
+      <Button 
+        type="primary" 
+        block 
+        onClick={sendOtp} 
+        loading={loading} 
+        disabled={otpSent}
+      >
+        {otpSent ? "OTP Sent" : "Send OTP"}
+      </Button>
+    </Col>
+  </Row>
+</Form.Item>
 
-        {!otpSent && (
-          <Button type="primary" onClick={sendOtp} loading={loading} block>
-            Send OTP
-          </Button>
-        )}
 
         {otpSent && (
           <Form.Item
@@ -124,6 +127,7 @@ const Signup = () => {
             Register
           </Button>
         </Form.Item>
+        <p>Already have an account? <Link to={"/login"}>Login</Link></p>
       </Form>
     </div>
   );
