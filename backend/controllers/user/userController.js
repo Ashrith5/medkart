@@ -1,5 +1,7 @@
 const User = require("../../models/userModel");
-const otpStore = require("../utils/otpStore");
+const otpStore = require("../../utils/otpStore");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 // Utility to generate OTP
 const generateOtp = () =>
