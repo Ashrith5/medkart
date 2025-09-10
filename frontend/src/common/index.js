@@ -1,12 +1,21 @@
 const backendDomain=process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"
 
 const SummaryApi = {
-    signUp:{
-        url:``,
+    signup:{
+        url:`${backendDomain}/api/signup`,
         method:"post"
     },
-    signIn:{
-        url:``,
+    sendOtp:{
+        url:`${backendDomain}/api/send-otp`,
+        method:"post"
+
+    },
+    signin:{
+        url:`${backendDomain}/api/signin`,
+        method:"post"
+    },
+    verifyotp:{
+        url:`${backendDomain}/api/verify-otp`,
         method:"post"
     }
 }

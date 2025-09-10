@@ -1,0 +1,117 @@
+/* Login.css */
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.login-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.login-tabs button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 8px 0;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.login-tabs button:hover {
+  background-color: #e5e7eb;
+}
+
+.login-tabs .ant-btn-primary,
+.login-tabs button.active {
+  background-color: #3b82f6 !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.login-form .ant-form-item-label > label {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.login-form .ant-input,
+.login-form .ant-input-password {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.login-form .ant-input:focus,
+.login-form .ant-input-password:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.login-form .ant-btn {
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.login-form .ant-btn:hover,
+.login-form .ant-btn:focus {
+  background-color: #2563eb;
+}
+
+.error-message {
+  color: #dc2626;
+  margin-top: 10px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.login-form .otp-resend {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.login-form .otp-resend .resend-btn {
+  border: none;
+  background: none;
+  color: #3b82f6;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: color 0.3s ease;
+}
+
+.login-form .otp-resend .resend-btn:hover {
+  color: #2563eb;
+}
+@media (max-width: 480px) {
+  .login-container {
+    margin: 20px;
+    padding: 20px;
+  }
+  .login-tabs button {
+    font-size: 13px;
+    padding: 6px 0;
+  }
+}

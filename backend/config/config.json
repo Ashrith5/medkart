@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Mani@9866",
+    "database": "medkart",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Mani@9866",
+    "database": "medkart",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Mani@9866",
+    "database": "medkart",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

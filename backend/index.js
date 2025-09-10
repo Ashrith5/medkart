@@ -2,12 +2,13 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const User = require('./models/userModel')
-const sequelize=require("./config/sequelize")
+const sequelize=require("./config/sequelize");
+const router = require('./routes/userroutes');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.use("/api",router);
 app.get('/', (req, res) => {
   res.send('Backend is running');
 });

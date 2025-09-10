@@ -1,20 +1,23 @@
 const express = require("express");
-const { sendOtp, signup, login } = require("../controllers/user/authController");
+const signUpController=require('../controllers/users/userSignup')
+const sendOtp  = require("../controllers/users/usercontroller");
 const authMiddleware = require("../middleware/authmiddleware");
-
+const signInController = require("../controllers/users/userSignin");
+const verifyOtp = require("../controllers/users/verifyOtp");
+const loginSendOtp = require("../controllers/users/loginOtp");
 const router = express.Router();
 
-// Public routes
 router.post("/send-otp", sendOtp);
-router.post("/signup", signup);
-router.post("/login", login);
+router.post("/signup", signUpController);
+router.post("/login-otp",loginSendOtp)
+router.post("/signin", signInController);
+router.post("/verify-otp",verifyOtp)
 
-// Protected route example
 router.get("/profile", authMiddleware, (req, res) => {
   res.json({
     success: true,
     message: "Profile fetched successfully",
-    user: req.user, // comes from token
+    user: req.user,
   });
 });
 
