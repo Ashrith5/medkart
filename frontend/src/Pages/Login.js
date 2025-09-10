@@ -19,7 +19,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(SummaryApi.sendOtp.url, { mobile });
+      const res = await axios.post(SummaryApi.loginSendOtp.url, { mobile });
       if (res.data.success) {
         message.success("OTP sent successfully!");
         setOtpSent(true);

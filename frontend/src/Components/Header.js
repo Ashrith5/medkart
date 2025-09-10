@@ -27,10 +27,6 @@ const Header = () => {
         <Badge count={2} size="small">
           <ShoppingCartOutlined className="icon" />
         </Badge>
-        <Link to={'/SignUp'}>
-        <Button type="primary" shape="round">Register/Login</Button>
-        </Link>
-       
       </div>
     </AntHeader>
   );

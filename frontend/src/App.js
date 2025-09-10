@@ -2,6 +2,7 @@ import 'antd/dist/reset.css';
 import './App.css';
 import Header from './Components/Header';
 import {Outlet} from 'react-router-dom';
+import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
 import {Button} from "antd";
 import Context from './context';
 import SummaryApi from './common';
@@ -10,6 +11,7 @@ import Home from './Components/Home';
 import Footer from './Components/Footer';
 import { setUserDetails } from './Stores/userSlice';
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
+import TopHeader from './Components/TopHeader';
 
 function App() {
   const dispatch=useDispatch()
@@ -29,6 +31,7 @@ function App() {
       fetchUserDetails,
     }}>
     <div className='App'>
+       <TopHeader/>
        <Header/>
        <main>
         <Outlet/>
