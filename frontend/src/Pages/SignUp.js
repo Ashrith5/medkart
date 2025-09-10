@@ -4,6 +4,7 @@ import axios from "axios";
 import SummaryApi from '../common/index'
 import { Link } from "react-router-dom";
 import "../Styles/SignUp.css";
+import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 
 const Signup = () => {
@@ -11,7 +12,7 @@ const Signup = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  
+  const navigate=useNavigate()  
   const sendOtp = async () => {
     const mobile = form.getFieldValue("mobile");
     if (!mobile) {
@@ -36,21 +37,31 @@ const Signup = () => {
   };
 
   const onFinish = async (values) => {
-    try {
-      const response = await axios.post(SummaryApi.signup.url, values);
-      if (response.data.success) {
-        message.success("Signup successful! Please login.");
-        form.resetFields();
-        setOtpSent(false);
-      } else {
-        message.error(response.data.message || "Signup failed");
+  try {
+    const response = await axios.post(SummaryApi.signup.url, values);
+
+    if (response.data.success) {
+      message.success("Signup successful! Please login.");
+      form.resetFields();
+      setOtpSent(false);
+      if(response.data.token){
+        localStorage.setItem("token",response.data.token)
       }
-    } catch (error) {
-      console.error(error);
+      navigate("/")
+    } else {
+      message.error(response.data.message || "Signup failed");
+    }
+  } catch (error) {
+    console.error("Signup error:", error);
+
+    // ✅ show backend message if available
+    if (error.response && error.response.data && error.response.data.message) {
+      message.error(error.response.data.message);
+    } else {
       message.error("Something went wrong. Try again!");
     }
-  };
-
+  }
+};
   return (
     <div className="signup-container">
       <Title level={3} className="signup-title">
