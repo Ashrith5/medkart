@@ -10,6 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 // Default route
 app.get('/', (req, res) => {
   res.send('Backend is running 🚀');

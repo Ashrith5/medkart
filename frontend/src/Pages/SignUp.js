@@ -25,7 +25,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(SummaryApi.send_otp.url, { mobile });
+      const res = await axios.post(SummaryApi.sendOtp.url, { mobile });
       if (res.data.success) {
         message.success("OTP sent successfully!");
         setOtpSent(true);
@@ -42,7 +42,7 @@ const Signup = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await axios.post(SummaryApi.signUp.url, values);
+      const response = await axios.post(SummaryApi.signup.url, values);
       if (response.data.success) {
         message.success("Signup successful! Please login.");
         form.resetFields();

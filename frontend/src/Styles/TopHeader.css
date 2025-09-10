@@ -1,0 +1,106 @@
+.top-bar {
+  background-color: #0019e0;
+  color: #ffffff;
+  font-family: 'Be Vietnam', sans-serif;
+  font-size: 14px;
+  padding: 8px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.left-section span {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-bar a,
+.top-bar .login-btnn {
+  color: #dbe3ff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.top-bar a:hover,
+.top-bar .login-btn:hover {
+  color: #ffffff;
+}
+
+.top-bar i {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.login-btnn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #dbe3ff;
+  font-size: 14px;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.login-btnn:hover {
+  color: #ffffff;
+}
+@media (max-width: 360px) {
+ .left-section{
+  display: none;
+ }
+  
+}
+
+@media (max-width: 1024px) {
+  .top-bar-content {
+    flex-direction: column;
+    align-items: center; 
+    gap: 6px;
+  }
+
+  .right-section {
+    justify-content: center; 
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .left-section {
+    display: none;
+  }
+
+  .top-bar-content {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right-section {
+    justify-content: center;
+    width: 100%;
+  }
+}
