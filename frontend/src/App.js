@@ -5,6 +5,7 @@ import {Outlet} from 'react-router-dom';
 import {Button} from "antd";
 import Context from './context';
 import Home from './Components/Home';
+import Footer from './Components/Footer';
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
        <main>
         <Outlet/>
        </main>
+       <Footer/>
    </div>
    </Context.Provider>
   );

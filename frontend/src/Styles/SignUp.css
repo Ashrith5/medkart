@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* SignUp.css */
 
 .signup-container {
@@ -16,10 +17,21 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 420px;
+=======
+.signup-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+>>>>>>> 4571a3615983935d54311c30db1f8b0b8becb7cf
 }
 
 .signup-title {
   text-align: center;
+<<<<<<< HEAD
   margin-bottom: 25px !important;
   font-weight: 600 !important;
   color: #1677ff !important; /* Ant Design primary color */
@@ -61,4 +73,15 @@
 
 .signup-form .ant-input::placeholder {
   color: #aaa;
+=======
+  margin-bottom: 20px !important;
+}
+
+.signup-form {
+  margin-top: 10px;
+}
+p{
+    margin-left: 100px;
+    color:red;
+>>>>>>> 4571a3615983935d54311c30db1f8b0b8becb7cf
 }
