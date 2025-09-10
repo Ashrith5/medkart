@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Typography, message } from "antd";
 import axios from "axios";
-import "./Signup.css";
+import "../Styles/SignUp.css";
 
 const { Title } = Typography;
 
