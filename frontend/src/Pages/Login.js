@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Typography, message } from "antd";
-import SummaryApi from "../common/index"; // your api config
 import axios from "axios";
+import SummaryApi from "../common/index"; // your API config
 import "../Styles/Login.css";
-
+import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState("password"); // default password login
+  const [activeTab, setActiveTab] = useState("password"); // default tab
   const [form] = Form.useForm();
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Send OTP
-  const sendOtp = async () => {
+     const navigate = useNavigate();
+  const loginSendOtp = async () => {
     const mobile = form.getFieldValue("mobile");
     if (!mobile) return message.warning("Enter mobile number first!");
 
     try {
       setLoading(true);
       const res = await axios.post(SummaryApi.loginSendOtp.url, { mobile });
+
       if (res.data.success) {
         message.success("OTP sent successfully!");
         setOtpSent(true);
@@ -28,44 +29,51 @@ const Login = () => {
       }
     } catch (err) {
       console.error(err);
-      message.error("Something went wrong!");
+      message.error(err.response?.data?.message || "Something went wrong!");
     } finally {
       setLoading(false);
     }
   };
 
-  // Handle form submit
   const onFinish = async (values) => {
     try {
       if (activeTab === "password") {
-        // password login
+        // Password login
         const res = await axios.post(SummaryApi.signin.url, {
           email: values.email,
           password: values.password,
         });
+
         if (res.data.success) {
           message.success("Login successful!");
           form.resetFields();
+          localStorage.setItem("token",res.data.token)
+          navigate("/")
         } else {
           message.error(res.data.message || "Invalid credentials");
         }
       } else {
-        // otp login
+        // OTP login
         const res = await axios.post(SummaryApi.verifyotp.url, {
           mobile: values.mobile,
           otp: values.otp,
         });
+
         if (res.data.success) {
           message.success("Login successful via OTP!");
           form.resetFields();
           setOtpSent(false);
+          if(res.data.token){
+            localStorage.setItem("token",res.data.token)
+          }
+          navigate("/")
         } else {
           message.error(res.data.message || "OTP verification failed");
         }
       }
     } catch (err) {
       console.error(err);
-      message.error("Login failed, try again!");
+      message.error(err.response?.data?.message || "Login failed, try again!");
     }
   };
 
@@ -139,7 +147,7 @@ const Login = () => {
             {!otpSent && (
               <Button
                 type="dashed"
-                onClick={sendOtp}
+                onClick={loginSendOtp}
                 loading={loading}
                 block
                 style={{ marginBottom: "10px" }}
