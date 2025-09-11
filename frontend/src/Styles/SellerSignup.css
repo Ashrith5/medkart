@@ -1,0 +1,139 @@
+/* Main container */
+.signup-container {
+  min-height: 100vh;
+  min-width:110vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff; /* white background */
+  padding: 20px;
+}
+file-upload {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.file-label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input[type="file"] {
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #555;
+  transition: 0.3s;
+}
+
+input[type="file"]:hover {
+  background-color: #e9ecef;
+}
+.signup-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal sides */
+  gap: 20px; /* space between inputs */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea,
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px; /* ensures height matches better */
+}
+
+/* Card box */
+.signup-card {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 900px; /* wider for 2 columns */
+  box-shadow: 0 6px 20px rgba(0, 0, 50, 0.15);
+  border: 2px solid #0044cc; /* blue border */
+}
+
+/* Title */
+.signup-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #0044cc; /* blue */
+}
+
+/* Two-column form */
+.signup-form {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Each column */
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs */
+.form-column input {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-column input:focus {
+  border: 1px solid #0044cc; /* blue border on focus */
+  box-shadow: 0 0 6px rgba(0, 68, 204, 0.3);
+}
+
+/* Button */
+.signup-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  background: #0044cc; /* blue */
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.signup-btn:hover {
+  background: #cc0000; /* red on hover */
+}
+
+/* Message */
+.signup-message {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}

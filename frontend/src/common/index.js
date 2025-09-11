@@ -1,5 +1,3 @@
-
-
 const backendDomain=process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"
 
 const SummaryApi = {
@@ -22,6 +20,14 @@ const SummaryApi = {
     },
     loginSendOtp:{
         url:`${backendDomain}/api/login-otp`,
+        method:"post"
+    },
+    sellerSignup:{
+        url:`${backendDomain}/api/admin-signup`,
+        method:"post"
+    },
+    sellerLogin:{
+        url:`${backendDomain}/api/admin-login`,
         method:"post"
     }
 }
