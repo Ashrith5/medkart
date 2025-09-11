@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Typography, message,Row,Col } from "antd";
+import { Form, Input, Button, Typography, message, Row, Col } from "antd";
 import axios from "axios";
-<<<<<<< HEAD
-import "../Styles/SignUp.css";
-
-=======
-import SummaryApi from '../common/index'
+import SummaryApi from "../common/index";
 import { Link } from "react-router-dom";
 import "../Styles/SignUp.css";
->>>>>>> 4571a3615983935d54311c30db1f8b0b8becb7cf
 const { Title } = Typography;
 
 const Signup = () => {
@@ -16,7 +11,6 @@ const Signup = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  
   const sendOtp = async () => {
     const mobile = form.getFieldValue("mobile");
     if (!mobile) {
@@ -61,8 +55,12 @@ const Signup = () => {
       <Title level={3} className="signup-title">
         Create Account
       </Title>
-      <Form form={form} layout="vertical" onFinish={onFinish} className="signup-form">
-        
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        className="signup-form"
+      >
         <Form.Item
           label="Name"
           name="name"
@@ -83,28 +81,29 @@ const Signup = () => {
         </Form.Item>
 
         <Form.Item
-  label="Mobile Number"
-  name="mobile"
-  rules={[{ required: true, message: "Please enter your mobile number" }]}
->
-  <Row gutter={8}>
-    <Col span={16}>
-      <Input placeholder="Enter mobile number" />
-    </Col>
-    <Col span={8}>
-      <Button 
-        type="primary" 
-        block 
-        onClick={sendOtp} 
-        loading={loading} 
-        disabled={otpSent}
-      >
-        {otpSent ? "OTP Sent" : "Send OTP"}
-      </Button>
-    </Col>
-  </Row>
-</Form.Item>
-
+          label="Mobile Number"
+          name="mobile"
+          rules={[
+            { required: true, message: "Please enter your mobile number" },
+          ]}
+        >
+          <Row gutter={8}>
+            <Col span={16}>
+              <Input placeholder="Enter mobile number" />
+            </Col>
+            <Col span={8}>
+              <Button
+                type="primary"
+                block
+                onClick={sendOtp}
+                loading={loading}
+                disabled={otpSent}
+              >
+                {otpSent ? "OTP Sent" : "Send OTP"}
+              </Button>
+            </Col>
+          </Row>
+        </Form.Item>
 
         {otpSent && (
           <Form.Item
@@ -132,7 +131,9 @@ const Signup = () => {
             Register
           </Button>
         </Form.Item>
-        <p>Already have an account? <Link to={"/login"}>Login</Link></p>
+        <p>
+          Already have an account? <Link to={"/login"}>Login</Link>
+        </p>
       </Form>
     </div>
   );

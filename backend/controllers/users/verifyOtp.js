@@ -1,6 +1,6 @@
 const User = require("../../models/userModel");
 const otpStore = require("../../config/otpStore");
-const sendOtp = require('../../controllers/users/verifyOtp')
+const sendOtp = require('./verifyOtp')
 
 const verifyOtp = async (req, res) => {
   try {
