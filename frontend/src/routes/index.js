@@ -3,8 +3,9 @@ import App from "../App";
 import Home from '../Components/Home';
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
-import SellerSignup from "../Pages/sellers/SellerSignUp";
-import SellerLogin from "../Pages/sellers/SellerLogin";
+import SellerSignup from "../Pages/sellers/Sellercredentials/SellerSignUp";
+import SellerLogin from "../Pages/sellers/Sellercredentials/SellerLogin";
+import SellerDashboard from "../Pages/sellers/Sellerdashboard/SellerDashBoard";
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path:"seller-signin",
                 element:<SellerLogin/>
+            },
+            {
+                path:"seller/dashboard",
+                element:<SellerDashboard/>
             }
         ]
     },

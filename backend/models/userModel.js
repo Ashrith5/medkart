@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const {DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
 
 const User = sequelize.define(
@@ -17,7 +17,6 @@ const User = sequelize.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         isEmail: true,
       },
@@ -27,10 +26,9 @@ const User = sequelize.define(
       allowNull: false,
     },
     mobile: {
-    type: DataTypes.STRING, 
-    allowNull: false,
-    unique: true,
-  },
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     role: {
       type: DataTypes.ENUM("Customer", "admin", "seller"),
       defaultValue: "Customer",
@@ -38,6 +36,16 @@ const User = sequelize.define(
   },
   {
     timestamps: true,
+    indexes: [
+      {
+        unique: true,
+        fields: ["email"],
+      },
+      {
+        unique: true,
+        fields: ["mobile"],
+      },
+    ],
   }
 );
 

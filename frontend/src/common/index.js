@@ -23,13 +23,51 @@ const SummaryApi = {
         method:"post"
     },
     sellerSignup:{
-        url:`${backendDomain}/api/admin-signup`,
+        url:`${backendDomain}/api/seller/admin-signup`,
         method:"post"
     },
     sellerLogin:{
-        url:`${backendDomain}/api/admin-login`,
+        url:`${backendDomain}/api/seller/admin-login`,
+        method:"post"
+    },
+    sellerDashboard:{
+        url:`${backendDomain}/api/seller/dashboard`,
+        method:"get"
+    },
+    sellerProfile:{
+        url:`${backendDomain}/api/seller/profile`,
+        method:"get"
+    },
+    uploadProduct:{
+        url:`${backendDomain}/api/seller/upload-product`,
+        method:"post"
+    },
+    getProducts:{
+        url:`${backendDomain}/api/seller/products`,
+        method:"get"
+    },
+    updateProfile:{
+        url:`${backendDomain}/api/seller/profile`,
+        method:"put"
+    },
+    getOrders:{
+        url:`${backendDomain}/api/seller/orders`,
+        method:"get"
+    },
+    updateorderStatus:{
+        url:`${backendDomain}/api/seller/orders`,
+        method:"put"
+    },
+    getStats:{
+        url:`${backendDomain}/api/seller/stats`,
+        method:"get"
+    },
+    uploadProduct:{
+        url:`${backendDomain}/api/seller/upload-product`,
         method:"post"
     }
+
+
 }
 
 export default SummaryApi

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SellerLogin from "./SellerLogin";
 import SellerSignup from "./SellerSignUp";
 import PendingApproval from "./PendingApproval";
-import SellerDashboard from "./SellerDashboard";
+import SellerDashboard from "../Sellerdashboard/SellerDashBoard";
 
 function SellerAdmin() {
   const [seller, setSeller] = useState(null); // { token, status }
