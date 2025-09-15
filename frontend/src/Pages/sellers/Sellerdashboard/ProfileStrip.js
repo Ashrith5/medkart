@@ -6,7 +6,7 @@ import { UserOutlined, LogoutOutlined, PlusOutlined, EditOutlined, ShoppingOutli
 function ProfileStrip({ seller, setActiveTab }) {
   const handleLogout = () => {
     localStorage.removeItem("sellerToken");
-    window.location.href = "/seller/login";
+    window.location.href = "/seller-signin";
   };
 
   return (
