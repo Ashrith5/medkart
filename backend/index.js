@@ -5,6 +5,9 @@ const sequelize = require("./config/sequelize");
 
 // Import routes
 const userRoutes = require("./routes/userroutes");
+const adminroutes = require("./routes/adminroutes");
+
+
 
 const app = express();
 app.use(cors());
@@ -18,6 +21,8 @@ app.get('/', (req, res) => {
 
 // Use user routes
 app.use("/api", userRoutes);
+app.use("/api/admin", adminroutes);
+
 
 const PORT = process.env.PORT || 8080;
 

@@ -16,10 +16,10 @@ const sendOtp = async (req, res) => {
     }
 
     // Check if user exists
-    const user = await User.findOne({ where : {mobile} });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    // const user = await User.findOne({ where : {mobile} });
+    // if (!user) {
+    //   return res.status(404).json({ message: "User not found" });
+    // }
 
     // Generate and store OTP
     const otp = generateOtp();

@@ -5,8 +5,20 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import SellerSignup from "../Pages/sellers/SellerSignUp";
 import SellerLogin from "../Pages/sellers/SellerLogin";
+import AdminSignup from "../Pages/admin/AdminSignup";
+import AdminLogin from  "../Pages/admin/AdminLogin";
+import AdminDashboardLayout from "../Pages/admin/adminDashboard/adminDashboardLayout";
 
-
+// Admin Dashboard pages
+import CategoryList from "../Pages/admin/adminDashboard/Categories/CategoryList";
+import AddEditCategory from "../Pages/admin/adminDashboard/Categories/AddEditCategory";
+import ReorderCategory from "../Pages/admin/adminDashboard/Categories/ReorderCategory";
+import CustomerList from "../Pages/admin/adminDashboard/Customers/CustomerList";
+import CustomerEdit from "../Pages/admin/adminDashboard/Customers/CustomerEdit";
+import ManageListings from "../Pages/admin/adminDashboard/sellers/ManageListings";
+import SellerContactEdit from "../Pages/admin/adminDashboard/sellers/SellerContactEdit";
+import PendingSellerList from "../Pages/admin/adminDashboard/sellers/PendingSellerList";
+import RejectedSellerList from "../Pages/admin/adminDashboard/sellers/RejectedSellerList";
 const router = createBrowserRouter([
     {
         path:"/",
@@ -30,6 +42,40 @@ const router = createBrowserRouter([
             {
                 path:"seller-signin",
                 element:<SellerLogin/>
+            },
+            {
+                path:"admin-signup",
+                element:<AdminSignup/>
+            },
+            {
+                path:"admin-signin",
+                element:<AdminLogin/>
+            },
+            // Admin Dashboard protected routes
+            {
+                path: "admindashboard",
+                element: <AdminDashboardLayout />,
+                children: [
+                    // ✅ Categories
+          { path: "categories", element: <CategoryList /> },
+          { path: "categories/add", element: <AddEditCategory /> },
+          { path: "categories/edit/:id", element: <AddEditCategory /> },
+          { path: "categories/reorder", element: <ReorderCategory /> },
+
+          // ✅ Customers
+          { path: "customers", element: <CustomerList /> },
+          { path: "customers/edit/:id", element: <CustomerEdit /> },
+
+
+
+          // ✅ sellers
+          { path: "sellers", element: <ManageListings /> },
+          { path: "sellers/edit-contact/:id", element: <SellerContactEdit /> },
+
+          // ✅ Sellers
+          { path: "pending-sellers", element: <PendingSellerList /> },
+          { path: "rejected-sellers", element: <RejectedSellerList /> },
+                ]
             }
         ]
     },
