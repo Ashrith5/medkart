@@ -6,10 +6,13 @@ const sequelize=require("./config/sequelize");
 const sellerRoutes = require('./routes/sellerRoutes')
 const userRoutes =require('./routes/userroutes')
 const adminroutes = require('./routes/adminroutes')
+const path = require('path');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api/seller',sellerRoutes)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.get('/', (req, res) => {
   res.send('Backend is running 🚀');
 });

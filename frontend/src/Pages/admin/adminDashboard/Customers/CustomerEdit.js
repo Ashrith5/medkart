@@ -1,41 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
+import SummaryApi from "../../../../common";
 
 const CustomerEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [customer, setCustomer] = useState({ name: "", email: "", phone: "" });
-  const [form] = Form.useForm(); // create form instance
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Fetch customer data by ID from API or state
-    const fetchedCustomer = {
-      id,
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "9876543210",
-    };
-    setCustomer(fetchedCustomer);
+    const fetchCustomer = async () => {
+      try {
+        setLoading(true);
+        const url = SummaryApi.getCustomerById.url.replace(":id", id);
 
-    // Update form values after fetching
-    form.setFieldsValue(fetchedCustomer);
+        const res = await fetch(url, { method: SummaryApi.getCustomerById.method });
+
+        if (!res.ok) throw new Error("Failed to fetch customer");
+
+        const data = await res.json();
+        form.setFieldsValue(data);
+      } catch (error) {
+        console.error("Failed to fetch customer:", error);
+        message.error("Unable to load customer details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomer();
   }, [id, form]);
 
-  const onFinish = (values) => {
-    console.log("Updated values:", values);
-    // Call API to update customer info
-    navigate("/admindashboard/customers");
+  const onFinish = async (values) => {
+    try {
+      setLoading(true);
+      const url = SummaryApi.updateCustomer.url.replace(":id", id);
+
+      const res = await fetch(url, {
+        method: SummaryApi.updateCustomer.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (res.ok) {
+        message.success("Customer updated successfully");
+        navigate("/admindashboard/customers");
+      } else {
+        message.error("Failed to update customer");
+      }
+    } catch (error) {
+      console.error("Error updating customer:", error);
+      message.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Edit Customer Info</h2>
-      <Form
-        form={form} // bind form instance
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item label="Name" name="name">
           <Input disabled />
         </Form.Item>
@@ -46,7 +71,9 @@ const CustomerEdit = () => {
           <Input />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">Save</Button>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Save
+          </Button>
         </Form.Item>
       </Form>
     </div>
@@ -54,3 +81,5 @@ const CustomerEdit = () => {
 };
 
 export default CustomerEdit;
+
+

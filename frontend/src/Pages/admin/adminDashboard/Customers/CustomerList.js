@@ -1,14 +1,35 @@
-import React, { useState } from "react";
-import { Table, Button, Space } from "antd";
+import React, { useState, useEffect } from "react";
+import { Table, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
+import SummaryApi from "../../../../common";
 
 const CustomerList = () => {
   const navigate = useNavigate();
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [customers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", phone: "9876543210", joiningDate: "2025-01-10" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", phone: "9123456780", joiningDate: "2025-02-15" },
-  ]);
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(SummaryApi.getCustomers.url, {
+          method: SummaryApi.getCustomers.method,
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch customers");
+
+        const data = await res.json();
+        setCustomers(data);
+      } catch (error) {
+        console.error("Failed to fetch customers:", error);
+        message.error("Unable to load customers");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCustomers();
+  }, []);
 
   const columns = [
     { title: "Name", dataIndex: "name", key: "name" },
@@ -19,7 +40,10 @@ const CustomerList = () => {
       title: "Actions",
       key: "actions",
       render: (_, record) => (
-        <Button type="primary" onClick={() => navigate(`/admindashboard/customers/edit/${record.id}`)}>
+        <Button
+          type="primary"
+          onClick={() => navigate(`/admindashboard/customers/edit/${record.id}`)}
+        >
           Edit Info
         </Button>
       ),
@@ -29,10 +53,17 @@ const CustomerList = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Manage Customers</h2>
-      <Table dataSource={customers} columns={columns} rowKey="id" />
+      <Table
+        dataSource={customers}
+        columns={columns}
+        rowKey="id"
+        loading={loading}
+      />
     </div>
   );
 };
 
 export default CustomerList;
+
+
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Button, Space, Popconfirm, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,53 +10,62 @@ import {
 
 const CategoryList = () => {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
 
-  // Dummy data for now
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      sortOrder: 1,
-      icon: "💊",
-      name: "Medicines",
-    },
-    {
-      id: 2,
-      sortOrder: 2,
-      icon: "🍼",
-      name: "Baby Care",
-    },
-    {
-      id: 3,
-      sortOrder: 3,
-      icon: "🍊",
-      name: "Vitamins",
-    },
-  ]);
+  // Fetch categories from backend
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/admin/categories");
+      const data = await res.json();
+      setCategories(data);
+    } catch (err) {
+      message.error("Failed to load categories");
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   // Delete handler
-  const handleDelete = (id) => {
-    setCategories(categories.filter((cat) => cat.id !== id));
-    message.success("Category deleted successfully");
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/admin/categories/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        message.success("Category deleted successfully");
+        fetchCategories(); // refresh list
+      } else {
+        message.error("Failed to delete category");
+      }
+    } catch (err) {
+      message.error("Error deleting category");
+    }
   };
 
   // Table columns
   const columns = [
-    {
-      title: "Sort Order",
-      dataIndex: "sortOrder",
-      key: "sortOrder",
-    },
+    { title: "Sort Order", dataIndex: "sortOrder", key: "sortOrder" },
     {
       title: "Icon",
       dataIndex: "icon",
       key: "icon",
-      render: (icon) => <span style={{ fontSize: "20px" }}>{icon}</span>,
+      render: (icon) => (
+        // Check if the icon value is a file path
+        icon && icon.startsWith('/uploads') ? (
+          <img
+            src={`http://localhost:8080${icon}`} // Construct the full URL
+            alt="category icon"
+            style={{ width: "40px", height: "40px", objectFit: "contain" }}
+          />
+        ) : (
+          // Otherwise, render as text for emojis or other data
+          <span style={{ fontSize: "20px" }}>{icon}</span>
+        )
+      ),
     },
-    {
-      title: "Category Name",
-      dataIndex: "name",
-      key: "name",
-    },
+    { title: "Category Name", dataIndex: "name", key: "name" },
     {
       title: "Actions",
       key: "actions",
@@ -66,7 +75,9 @@ const CategoryList = () => {
             type="primary"
             icon={<EditOutlined />}
             style={{ background: "#1129CE" }}
-            onClick={() => navigate(`/admindashboard/categories/edit/${record.id}`)}
+            onClick={() =>
+              navigate(`/admindashboard/categories/edit/${record.id}`)
+            }
           >
             Edit
           </Button>

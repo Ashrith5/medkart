@@ -67,7 +67,7 @@ const SummaryApi = {
         url:`${backendDomain}/api/seller/upload-product`,
         method:"post"
     },
-    // ---------------- ADMIN APIS ----------------
+
   adminSignupRequestOtp: {
     url: `${backendDomain}/api/admin/signup/request-otp`,
     method: "post",
@@ -88,7 +88,38 @@ const SummaryApi = {
     url: `${backendDomain}/api/admin/login/verify-otp`,
     method: "post",
   },
-     
-}
+  getCategories: {
+    url: `${backendDomain}/api/admin/categories`,
+    method: "get",
+  },
+  getCategoryById: {
+    url: `${backendDomain}/api/admin/categories/:id`,
+    method: "get",
+  },
+  createCategory: {
+    url: `${backendDomain}/api/admin/categories`,
+    method: "post",
+  },
+  updateCategory: {
+    url: `${backendDomain}/api/admin/categories/:id`,
+    method: "put",
+  },
+  deleteCategory: {
+    url: `${backendDomain}/api/admin/categories/:id`,
+    method: "delete",
+  },
+  getCustomers: {
+    url: `${backendDomain}/api/admin/customers`,
+    method: "get",
+  },
+  getCustomerById: {
+    url: `${backendDomain}/api/admin/customers/:id`,
+    method: "get",
+  },
+  updateCustomer: {
+    url: `${backendDomain}/api/admin/customers/:id`,
+    method: "put",
+  },
+};
 
 export default SummaryApi
