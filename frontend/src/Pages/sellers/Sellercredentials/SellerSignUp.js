@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SummaryApi from "../../common";
-import "../../Styles/SellerSignup.css";
+import SummaryApi from "../../../common/index";
+import "../../../Styles/SellerSignup.css";
+import { useNavigate } from "react-router-dom";
 
 function SellerSignup() {
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -36,7 +38,9 @@ function SellerSignup() {
     e.preventDefault();
     try {
       await axios.post(SummaryApi.sellerSignup.url, form);
-      setMessage("✅ Account created! Waiting for admin approval.");
+      setMessage("✅ Account created! ");
+      navigate("/seller-signin")
+
     } catch (err) {
       setMessage(err.response?.data?.message || "❌ Signup failed");
     }

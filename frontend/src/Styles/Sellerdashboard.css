@@ -1,0 +1,11 @@
+.seller-dashboard {
+  padding: 20px;
+  background: #f9fdf9; /* light greenish background */
+  min-height: 100vh;
+}
+
+.seller-dashboard h2 {
+  color: #2e7d32;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

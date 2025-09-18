@@ -3,11 +3,12 @@ import App from "../App";
 import Home from '../Components/Home';
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
-import SellerSignup from "../Pages/sellers/SellerSignUp";
-import SellerLogin from "../Pages/sellers/SellerLogin";
 import AdminSignup from "../Pages/admin/AdminSignup";
 import AdminLogin from  "../Pages/admin/AdminLogin";
 import AdminDashboardLayout from "../Pages/admin/adminDashboard/adminDashboardLayout";
+import SellerSignup from "../Pages/sellers/Sellercredentials/SellerSignUp";
+import SellerLogin from "../Pages/sellers/Sellercredentials/SellerLogin";
+import SellerDashboard from "../Pages/sellers/Sellerdashboard/SellerDashBoard";
 
 // Admin Dashboard pages
 import CategoryList from "../Pages/admin/adminDashboard/Categories/CategoryList";
@@ -75,7 +76,12 @@ const router = createBrowserRouter([
           // ✅ Sellers
           { path: "pending-sellers", element: <PendingSellerList /> },
           { path: "rejected-sellers", element: <RejectedSellerList /> },
-                ]
+                ],
+            },
+            // Seller Dashboard protected routes
+            {
+                path:"seller/dashboard",
+                element:<SellerDashboard/>
             }
         ]
     },

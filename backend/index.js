@@ -1,20 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const sequelize = require("./config/sequelize");
-
-// Import routes
-const userRoutes = require("./routes/userroutes");
-const adminroutes = require("./routes/adminroutes");
-
-
-
+const User = require('./models/userModel')
+const sequelize=require("./config/sequelize");
+const sellerRoutes = require('./routes/sellerRoutes')
+const userRoutes =require('./routes/userroutes')
+const adminroutes = require('./routes/adminroutes')
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-
-// Default route
+app.use('/api/seller',sellerRoutes)
 app.get('/', (req, res) => {
   res.send('Backend is running 🚀');
 });

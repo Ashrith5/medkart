@@ -1,35 +1,57 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Seller = require("../../models/sellerModel");
-
-// Seller Login
-const sellerSignin = async (req, res) => {
+const { Op } = require("sequelize");   
+const Seller = require('../../models/sellerModel')
+const sellerSignIn = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const seller = await Seller.findOne({ where: { email } });
+    const { login, password } = req.body;
 
-    if (!seller) return res.status(401).json({ message: "❌ Seller not found" });
-
-    const isPasswordValid = await bcrypt.compare(password, seller.password);
-    if (!isPasswordValid)
-      return res.status(401).json({ message: "❌ Invalid password" });
-
-    if (seller.status !== "active") {
-      return res.status(403).json({
-        message: "⚠️ Account not active. Wait for admin approval."
-      });
+    if (!login || !password) {
+      return res.status(400).json({ message: "Please provide email/phone and password" });
     }
 
+    // Search by email OR phone
+    const seller = await Seller.findOne({
+      where: {
+        [Op.or]: [{ email: login }, { phone: login }],
+      },
+    });
+    console.log("👉 Login input:", login);
+    console.log("👉 Seller from DB:", seller ? seller.toJSON() : null);
+
+
+    // If no seller exists
+    if (!seller) {
+      return res.status(401).json({ message: "❌ Invalid email/phone or password" });
+    }
+
+    // Check password
+    const isPasswordValid = await bcrypt.compare(password, seller.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "❌ Invalid email/phone or password" });
+    }
+
+    // Generate token
     const token = jwt.sign(
       { id: seller.id, role: "seller" },
-      process.env.JWT_SECRET,
+      process.env.TOKEN_SECRET_KEY,
       { expiresIn: "1d" }
     );
 
-    res.json({ message: "✅ Login successful", token });
+    res.json({
+      message: "✅ Login successful",
+      token,
+      seller: {
+        id: seller.id,
+        name: seller.name,
+        email: seller.email,
+        phone: seller.phone,
+        storeName: seller.store_name,
+      },
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Seller SignIn Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
-
-module.exports = sellerSignin;
+module.exports=sellerSignIn

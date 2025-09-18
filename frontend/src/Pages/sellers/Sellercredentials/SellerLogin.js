@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SummaryApi from "../../common";
+import '../../../Styles/SellerLogin.css'
+import SummaryApi from "../../../common/index";
 
 function SellerLogin({ setSellerToken }) {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ login: "", password: "" }); // login = email or mobile
   const [message, setMessage] = useState("");
 
   const handleChange = (e) =>
@@ -13,22 +14,32 @@ function SellerLogin({ setSellerToken }) {
     e.preventDefault();
     try {
       const res = await axios.post(SummaryApi.sellerLogin.url, form);
-      setSellerToken(res.data.token);
-      setMessage("Login successful");
+
+      // Store token in localStorage
+      localStorage.setItem("sellerToken", res.data.token);
+      localStorage.setItem("sellerInfo", JSON.stringify(res.data.seller));
+
+      // Optionally update parent state
+      if (setSellerToken) setSellerToken(res.data.token);
+
+      setMessage("✅ Login successful");
+
+      // Redirect to dashboard
+      window.location.href = "/seller/dashboard";
     } catch (err) {
       setMessage(err.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div>
+    <div className="seller-login">
       <h2>Seller Login</h2>
       <form onSubmit={handleSubmit}>
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
+          type="text"
+          name="login"
+          placeholder="Email or Mobile"
+          value={form.login}
           onChange={handleChange}
           required
         />
@@ -42,7 +53,7 @@ function SellerLogin({ setSellerToken }) {
         />
         <button type="submit">Login</button>
       </form>
-      <p>{message}</p>
+      <p style={{ color: "red" }}>{message}</p>
     </div>
   );
 }

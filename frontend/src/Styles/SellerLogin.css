@@ -1,0 +1,85 @@
+.seller-login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f7fa; 
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.seller-login h2 {
+  color: #2575fc; /* Blue heading */
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+
+  text-align: center;
+}
+
+.seller-login form {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.seller-login input {
+  margin-bottom: 1.2rem;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.seller-login input:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 6px rgba(37, 117, 252, 0.25);
+}
+
+.seller-login button {
+  padding: 12px 15px;
+  font-size: 1rem;
+  background: #2575fc; /* Blue button */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.seller-login button:hover {
+  background: #1a5edb;
+  transform: translateY(-2px);
+}
+
+.seller-login p {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.seller-login p.success {
+  color: green;
+}
+
+.seller-login p.error {
+  color: red;
+}
+
+/* Small screen adjustments */
+@media (max-width: 480px) {
+  .seller-login form {
+    padding: 1.5rem;
+    width: 90%;
+  }
+
+  .seller-login h2 {
+    font-size: 1.6rem;
+  }
+}
