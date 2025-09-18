@@ -5,11 +5,10 @@ import axios from "axios";
 import SummaryApi from "../../../common";
 
 function ProductManager({ seller, token }) {
-  const [isModalOpen, setIsModalOpen] = useState(true); // ✅ open immediately
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [products, setProducts] = useState([]);
   const {Option} = Select;
 
-  // Fetch existing products
   const fetchProducts = async () => {
     try {
       const res = await axios.get(SummaryApi.getProducts.url, {
@@ -24,20 +23,17 @@ function ProductManager({ seller, token }) {
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  // Handle product upload
+  
   const handleFinish = async (values) => {
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("category", values.category);
-    formData.append("actual_price", values.actual_price);
-    formData.append("selling_price", values.selling_price);
-    formData.append("description", values.description);
-    formData.append("stock", values.stock);
-    formData.append("deliveryOption", values.deliveryOption);
-    if (values.image && values.image.file) {
-      formData.append("image", values.image.file.originFileObj);
-    }
+const formData = new FormData();
+Object.keys(values).forEach((key) => {
+  if (key !== "image") {
+    formData.append(key, values[key]);
+  }
+});
+if (values.image && values.image[0]) {
+  formData.append("image", values.image[0].originFileObj);
+}
 
     try {
       await axios.post(SummaryApi.uploadProduct.url, formData, {
@@ -96,39 +92,59 @@ function ProductManager({ seller, token }) {
 </Select>
 </Form.Item>
 
-          <Form.Item name="image" label="Upload Image" valuePropName="file">
-            <Upload beforeUpload={() => false} maxCount={1}>
-              <Button icon={<UploadOutlined />}>Select Image</Button>
-            </Upload>
-          </Form.Item>
-
-          <Button type="primary" htmlType="submit" block>
-            Upload
-          </Button>
+          <Form.Item
+  name="image"
+  label="Upload Image"
+  valuePropName="fileList"
+  getValueFromEvent={(e) => {
+    console.log("Upload event:", e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  }}
+>
+  <Upload beforeUpload={() => false} maxCount={1}>
+    <Button icon={<UploadOutlined />}>Select Image</Button>
+  </Upload>
+</Form.Item>
+<Form.Item>
+    <Button type="primary" htmlType="submit" block>
+      Upload Product
+    </Button>
+  </Form.Item>
         </Form>
+
       </Modal>
+
+      
 
       {/* Product List */}
       <div style={{ marginTop: "20px" }}>
-        {products.map((p) => (
-          <div key={p.id} style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
-   <p><strong>{p.name}</strong></p>
-    <p>Category: {p.category}</p>
-   <p>Stock: {p.stock}</p>
-   <p>Delivery: {p.deliveryOption}</p>
-   <p>
-    Price: ₹{p.sellingPrice}{" "}
-    <span style={{ textDecoration: "line-through", color: "red" }}>
-      ₹{p.actualPrice}
-    </span>
-  </p>
-  {p.images?.length > 0 && (
-    <img src={`/uploads/${p.images[0]}`} alt={p.name} style={{ width: "100px" }} />
-  )}
-   </div>
+  {products.map((p) => (
+    <div key={p.id} style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
+      <p><strong>{p.name}</strong></p>
+      <p>Category: {p.category}</p>
+      <p>Stock: {p.stock}</p>
+      <p>Delivery: {p.deliveryOption}</p>
+      <p>
+        Price: ₹{p.selling_price}{" "}
+        <span style={{ textDecoration: "line-through", color: "red" }}>
+          ₹{p.actual_price}
+        </span>
+      </p>
+     {p.images && (
+  <img
+    src={`${process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"}${p.images}`}
+    alt={p.name}
+    style={{ width: "100px" }}
+  />
+)}
 
-        ))}
-      </div>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 }

@@ -11,15 +11,11 @@ function ProfileStrip({ seller, setActiveTab }) {
 
   return (
     <div className="profile-strip">
-    
-      <Avatar
-        size={64}
+      <Avatar size={64}
         src={seller?.profilePicture || null}
         icon={<UserOutlined />}
         style={{ marginRight: "12px" }}
       />
-
-
       <div className="profile-info">
         <h3>{seller?.name || "Seller"}</h3>
         <p>{seller?.email}</p>

@@ -1,11 +1,66 @@
+/* Background for whole dashboard */
 .seller-dashboard {
-  padding: 20px;
-  background: #f9fdf9; /* light greenish background */
+  background-color: #FFFFFA; /* Baby Powder */
   min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.seller-dashboard h2 {
-  color: #2e7d32;
-  font-weight: bold;
+/* Content area */
+.dashboard-content {
+  padding: 20px;
+  background: transparent;
+}
+
+/* Profile strip (top bar) */
+.profile-strip {
+  background-color: #1129CE; /* Persian Blue */
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
+
+/* Stat Tiles */
+.stat-tile {
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.stat-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons (upload product, etc.) */
+.ant-btn-primary {
+  background-color: #EE152D !important; /* Imperial Red */
+  border-color: #EE152D !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.ant-btn-primary:hover {
+  background-color: #c51225 !important;
+  border-color: #c51225 !important;
+}
+
+/* Order status colors */
+.status-pending {
+  color: #FAA00F; /* Orange Peel */
+  font-weight: bold;
+}
+
+.status-completed {
+  font-weight: bold;
+}
+
+.status-issue {
+  color: #5C0029; /* Tyrian Purple */
+  font-weight: bold;
+}
+

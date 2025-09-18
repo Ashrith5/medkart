@@ -11,9 +11,13 @@ const addProduct = async (req, res) => {
     }
 
     const seller = await Seller.findByPk(sellerId);
-    if (!seller) return res.status(404).json({ success: false, message: "Seller not found" });
+    if (!seller) {
+      return res.status(404).json({ success: false, message: "Seller not found" });
+    }
 
+    // Save image path as an array (JSON column in DB)
     const imagePath = req.file ? `/uploads/products/${req.file.filename}` : null;
+    const images = imagePath ? [imagePath] : [];
 
     const product = await Product.create({
       seller_id: sellerId,
@@ -21,11 +25,11 @@ const addProduct = async (req, res) => {
       description,
       category,
       brand,
-      actual_price,
-      selling_price,
-      stock,          // ✅ number of items
+      actual_price: parseFloat(actual_price),
+      selling_price: parseFloat(selling_price),
+      stock: parseInt(stock, 10),
       sku,
-      images: imagePath,
+      images:imagePath ? [imagePath] : [],
       deliveryOption
     });
 

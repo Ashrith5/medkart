@@ -1,35 +1,63 @@
+/* Colors used:
+   Persian Blue: #1C39BB
+   Imperial Red: #ED2939
+   Baby Powder: #FEFEFA
+*/
+
 .product-manager {
   padding: 20px;
-  background: #ffffff;
+  background: #FEFEFA; /* Baby Powder background */
   border-radius: 12px;
-  box-shadow: 0px 2px 10px rgba(46, 125, 50, 0.1);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-manager h3 {
   font-size: 20px;
   font-weight: bold;
-  color: #2e7d32;
+  color: #1C39BB; /* Persian Blue for headings */
   margin-bottom: 15px;
 }
 
 .product-manager .ant-btn-primary {
-  background-color: #2e7d32;
-  border-color: #2e7d32;
+  background-color: #1C39BB; /* Persian Blue buttons */
+  border-color: #1C39BB;
   font-weight: 600;
+  color: #FEFEFA; /* Baby Powder text */
 }
 
 .product-manager .ant-btn-primary:hover {
-  background-color: #1b5e20;
-  border-color: #1b5e20;
+  background-color: #ED2939; /* Imperial Red on hover */
+  border-color: #ED2939;
+  color: #FEFEFA;
 }
 
 .product-manager .ant-table-thead > tr > th {
-  background: #a5d6a7 !important;
-  color: #1b5e20;
+  background: #1C39BB !important; /* Persian Blue table header */
+  color: #FEFEFA;
   font-weight: bold;
   text-align: center;
 }
 
 .product-manager .ant-table-tbody > tr:hover > td {
-  background: #f1f8f4 !important;
+  background: #FEFEFA !important; /* Baby Powder row hover */
+}
+
+.product-manager .product-card {
+  border: 1px solid #1C39BB; /* Persian Blue border */
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #FEFEFA; /* Baby Powder card background */
+  transition: 0.3s;
+}
+
+.product-manager .product-card:hover {
+  background: #ED2939; /* Imperial Red hover for cards */
+  color: #FEFEFA; /* ensure text is readable */
+}
+
+.product-manager .product-card img {
+  width: 120px;
+  border-radius: 8px;
+  margin-top: 8px;
 }

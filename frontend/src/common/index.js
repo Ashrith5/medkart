@@ -62,10 +62,6 @@ const SummaryApi = {
         url:`${backendDomain}/api/seller/stats`,
         method:"get"
     },
-    uploadProduct:{
-        url:`${backendDomain}/api/seller/upload-product`,
-        method:"post"
-    }
 
 
 }

@@ -3,7 +3,7 @@ const Seller = require("../models/sellerModel");
 
 const sellerAuth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1]; // Expect Bearer token
+    const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ message: "No token provided" });
 
     // Verify JWT
@@ -12,11 +12,11 @@ const sellerAuth = async (req, res, next) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    // Fetch seller from DB
+    // Fetch seller
     const seller = await Seller.findByPk(decoded.id);
     if (!seller) return res.status(404).json({ message: "Seller not found" });
 
-    req.seller = seller; // Attach seller to request
+    req.seller = seller; // ✅ attach seller here
     next();
   } catch (err) {
     console.error("Seller Auth Error:", err);
